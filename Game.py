@@ -54,7 +54,10 @@ class Game():
 
         self.groupPacMan.add(self.pacMan)
 
+        # carrega nossas spritesheets
         self.campFire = self.loadSpriteSheetPacket('./assets/spritesheet', 'CampFire.png', (64, 64))
+        self.goblin = self.loadSpriteSheetPacket('./assets/spritesheet', 'goblinsword.png', (64, 64))
+
         self.genericGroupSprite.add(Sprite.GSprite(self.campFire, (1 / self.fps) * 0.5, (600, 500)))
 
     def loadSpriteSheetPacket(self, imagePath, spriteSheetName, dimensionSheet:(int, int), scaleSprite = (1.0, 1.0)):
@@ -76,7 +79,7 @@ class Game():
                 
                 sprites.append(tempImage)
 
-                print(f'Clip SubSurface [{x * dimensionSheet[0], y * dimensionSheet[1], dimensionSheet[0], dimensionSheet[1]}]')
+                print(f'SpriteSheet - [{spriteSheetName}] - Clip SubSurface [{x * dimensionSheet[0], y * dimensionSheet[1], dimensionSheet[0], dimensionSheet[1]}]')
 
         return sprites
 
