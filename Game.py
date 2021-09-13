@@ -38,17 +38,17 @@ class Game():
         
         # carrega o pacote de imagem (conjunto que define a sprite)
         self.packetImageBird = self.loadImagePacket("./assets/sprite/bird", "frame", 8, (0.3, 0.3))
-        self.packetImageBall = self.loadImagePacket("./assets/sprite/ball", "frame", 12, (1.0, 1.0))
+        self.packetImagePacMan = self.loadImagePacket("./assets/sprite/pacman", "frame", 5, (1.0, 1.0))
         
         # cria os grupos das sprites
         self.groupBird = pygame.sprite.Group()
-        self.groupBall = pygame.sprite.Group()
+        self.groupPacMan = pygame.sprite.Group()
 
         # inicializa uma sprite e coloca no seu devido grupo
         self.groupBird.add(Sprite.GSprite(self.packetImageBird, (1 / self.fps)))
         self.groupBird.add(Sprite.GSprite(self.packetImageBird, (1 / self.fps) * 3, (200, 200)))
 
-        self.groupBall.add(Sprite.)
+        self.groupPacMan.add(Sprite.GSprite(self.packetImagePacMan, (1 / self.fps) * 3, (500, 500)))
 
     def loadImagePacket(self, imagePath, prefixImageName, numSprite, scaleSprite = (1, 1)):
         '''
@@ -67,7 +67,7 @@ class Game():
             tempImageName = prefixImageName + '_' + str(n_sprite) + '.png'
             folderImage = os.path.join(imagePath, tempImageName)
             print(f'Loading Imagem: [{folderImage}]')
-            tempImageSurface = pygame.image.load(folderImage).convert()
+            tempImageSurface = pygame.image.load(folderImage).convert_alpha()
             sprites.append(pygame.transform.scale(tempImageSurface, (int(tempImageSurface.get_width() * scaleSprite[0]), int(tempImageSurface.get_height() * scaleSprite[1]))))
         
         return sprites
@@ -92,6 +92,8 @@ class Game():
         '''
         while self.gameRunning:
             self.deltaTime = self.gameClock.tick(self.fps)
+
+            self.screen.fill((127, 0 ,0))
 
             for event in pygame.event.get():
                 self.gameEvent(event)
@@ -121,6 +123,7 @@ class Game():
             Função responsável por atualizar a lógica do jogo
         '''
         self.groupBird.update(self.deltaTime)
+        self.groupPacMan.update(self.deltaTime)
 
     # função de renderização
     def gameRender(self):
@@ -129,6 +132,7 @@ class Game():
         '''
 
         self.groupBird.draw(self.screen)
+        self.groupPacMan.draw(self.screen)
 
 game = Game((800, 600), title='Game - Sprite')
 game.gameMain()
