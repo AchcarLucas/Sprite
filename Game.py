@@ -7,6 +7,7 @@ import Sprite
 
 '''
     Free Sprite and SpriteSheet     ->  https://opengameart.org/content/lots-of-free-2d-tiles-and-sprites-by-hyptosis
+    Camp Fire						->	https://opengameart.org/content/camp-fire-animation-for-rpgs-finished
     Bird (Sprite)                   ->  https://opengameart.org/content/fat-bird-sprite-sheets-for-gamedev
     Bat (SpriteSheet)               ->  https://opengameart.org/content/bat-sprite
     Goblin (SpriteeSheet)           ->  https://opengameart.org/content/lpc-goblin
@@ -43,12 +44,42 @@ class Game():
         # cria os grupos das sprites
         self.groupBird = pygame.sprite.Group()
         self.groupPacMan = pygame.sprite.Group()
+        self.genericGroupSprite = pygame.sprite.Group()
 
         # inicializa uma sprite e coloca no seu devido grupo
         self.groupBird.add(Sprite.GSprite(self.packetImageBird, (1 / self.fps)))
         self.groupBird.add(Sprite.GSprite(self.packetImageBird, (1 / self.fps) * 3, (200, 200)))
 
-        self.groupPacMan.add(Sprite.GSprite(self.packetImagePacMan, (1 / self.fps) * 3, (500, 500)))
+        self.pacMan = Sprite.GSprite(self.packetImagePacMan, (1 / self.fps) * 3, (500, 500))
+
+        self.groupPacMan.add(self.pacMan)
+
+        self.campFire = self.loadSpriteSheetPacket('./assets/spritesheet', 'CampFire.png', (64, 64))
+        self.genericGroupSprite.add(Sprite.GSprite(self.campFire, (1 / self.fps) * 0.5, (600, 500)))
+
+    def loadSpriteSheetPacket(self, imagePath, spriteSheetName, dimensionSheet:(int, int), scaleSprite = (1.0, 1.0)):
+        '''
+            Função loadSpriteSheetPacket, cria uma lista de sprites a partir de uma spritesheet
+                imagePath       ->  local onde deve ser lido as imagens
+                dimensionSprite ->  dimensão da sprite (largura e altura)
+                scaleSprite     ->  escala das imagens no eixo x e no eixo y
+                Ex: loadSpriteSheetPacket('./assets/spritesheet/CampFire.png', (64, 64), (1, 1))
+        '''
+        sprites = []
+
+        tempSpriteSheet = pygame.image.load(os.path.join(imagePath, spriteSheetName)).convert_alpha()
+
+        for x in range(0, int((tempSpriteSheet.get_width() / dimensionSheet[0]))):
+            for y in range(0, int((tempSpriteSheet.get_height() / dimensionSheet[1]))):
+                tempImage = pygame.Surface(dimensionSheet)
+                tempImage = tempSpriteSheet.subsurface((x * dimensionSheet[0], y * dimensionSheet[1], dimensionSheet[0], dimensionSheet[1]))
+                
+                sprites.append(tempImage)
+
+                print(f'Clip SubSurface [{x * dimensionSheet[0], y * dimensionSheet[1], dimensionSheet[0], dimensionSheet[1]}]')
+
+        return sprites
+
 
     def loadImagePacket(self, imagePath, prefixImageName, numSprite, scaleSprite = (1, 1)):
         '''
@@ -93,7 +124,7 @@ class Game():
         while self.gameRunning:
             self.deltaTime = self.gameClock.tick(self.fps)
 
-            self.screen.fill((127, 0 ,0))
+            self.screen.fill((0, 0 ,0))
 
             for event in pygame.event.get():
                 self.gameEvent(event)
@@ -122,8 +153,10 @@ class Game():
         '''
             Função responsável por atualizar a lógica do jogo
         '''
+
         self.groupBird.update(self.deltaTime)
         self.groupPacMan.update(self.deltaTime)
+        self.genericGroupSprite.update(self.deltaTime)
 
     # função de renderização
     def gameRender(self):
@@ -133,6 +166,7 @@ class Game():
 
         self.groupBird.draw(self.screen)
         self.groupPacMan.draw(self.screen)
+        self.genericGroupSprite.draw(self.screen)
 
 game = Game((800, 600), title='Game - Sprite')
 game.gameMain()

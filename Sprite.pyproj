@@ -28,11 +28,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\" />
+    <Folder Include="assets\spritesheet\" />
     <Folder Include="assets\sprite\" />
     <Folder Include="assets\sprite\bird\" />
     <Folder Include="assets\sprite\pacman\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\spritesheet\32x32-bat-sprite.png" />
+    <Content Include="assets\spritesheet\CampFire.png" />
+    <Content Include="assets\spritesheet\credits.txt" />
+    <Content Include="assets\spritesheet\goblinsword.png" />
     <Content Include="assets\sprite\bird\frame_0.png" />
     <Content Include="assets\sprite\bird\frame_1.png" />
     <Content Include="assets\sprite\bird\frame_2.png" />
