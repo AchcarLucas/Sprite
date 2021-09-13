@@ -36,15 +36,19 @@ class Game():
         # inicializa o game
         self.initGame()
         
-         # carrega o pacote de imagem (conjunto que define a sprite)
+        # carrega o pacote de imagem (conjunto que define a sprite)
         self.packetImageBird = self.loadImagePacket("./assets/sprite/bird", "frame", 8, (0.3, 0.3))
+        self.packetImageBall = self.loadImagePacket("./assets/sprite/ball", "frame", 12, (1.0, 1.0))
         
         # cria os grupos das sprites
         self.groupBird = pygame.sprite.Group()
+        self.groupBall = pygame.sprite.Group()
 
         # inicializa uma sprite e coloca no seu devido grupo
-        self.groupBird.add(Sprite.SpriteBird(self.packetImageBird, (1 / self.fps)))
-        self.groupBird.add(Sprite.SpriteBird(self.packetImageBird, (1 / self.fps) * 3, (200, 200)))
+        self.groupBird.add(Sprite.GSprite(self.packetImageBird, (1 / self.fps)))
+        self.groupBird.add(Sprite.GSprite(self.packetImageBird, (1 / self.fps) * 3, (200, 200)))
+
+        self.groupBall.add(Sprite.)
 
     def loadImagePacket(self, imagePath, prefixImageName, numSprite, scaleSprite = (1, 1)):
         '''

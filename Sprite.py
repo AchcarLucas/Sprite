@@ -1,6 +1,6 @@
 import pygame
 
-class SpriteBird(pygame.sprite.Sprite):
+class GSprite(pygame.sprite.Sprite):
     def __init__(self, spriteList, spriteVelocity, spritePosition = (0, 0)):
         # Chama o construtor __init__ da classe superior
         pygame.sprite.Sprite.__init__(self)
