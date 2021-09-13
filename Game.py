@@ -1,5 +1,13 @@
 import pygame
 
+# Código desenvolvido por Lucas Campos Achcar para a aula de monitoria em Computação Cientifica em Python
+
+'''
+    Free Sprite and SpriteSheet   ->  https://opengameart.org/content/lots-of-free-2d-tiles-and-sprites-by-hyptosis
+    Bird (Sprite)                 ->  https://opengameart.org/content/fat-bird-sprite-sheets-for-gamedev
+    Bat (SpriteSheet)             ->  https://opengameart.org/content/bat-sprite
+'''
+
 class Game():
     '''
         Classe responsável por gerenciar o jogo

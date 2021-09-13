@@ -22,11 +22,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Game.py" />
+    <Compile Include="Sprite.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SpriteSheet.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\" />
     <Folder Include="assets\spritesheet\" />
-    <Folder Include="assets\sprite\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\spritesheet\32x32-bat-sprite.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
