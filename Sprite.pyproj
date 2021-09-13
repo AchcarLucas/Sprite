@@ -22,6 +22,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Game.py" />
+    <Compile Include="Goblin.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Sprite.py">
       <SubType>Code</SubType>
     </Compile>
