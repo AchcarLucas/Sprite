@@ -1,4 +1,5 @@
 import pygame
+import os
 
 import Sprite
 
@@ -35,6 +36,38 @@ class Game():
         # inicializa o game
         self.initGame()
         
+         # carrega o pacote de imagem (conjunto que define a sprite)
+        self.packetImageBird = self.loadImagePacket("./assets/sprite/bird", "frame", 8, (0.3, 0.3))
+        
+        # cria os grupos das sprites
+        self.groupBird = pygame.sprite.Group()
+
+        # inicializa uma sprite e coloca no seu devido grupo
+        self.groupBird.add(Sprite.SpriteBird(self.packetImageBird, (1 / self.fps)))
+        self.groupBird.add(Sprite.SpriteBird(self.packetImageBird, (1 / self.fps) * 3, (200, 200)))
+
+    def loadImagePacket(self, imagePath, prefixImageName, numSprite, scaleSprite = (1, 1)):
+        '''
+            Função loadImagePack, cria uma lista de sprites com imagens com nomes prefix
+                imagePath       ->  local onde deve ser lido as imagens
+                prefixImageName ->  prefixo da imagem
+                numSprite       ->  número de sprites
+                scaleSprite     ->  escala da imagem no eixo x e no eixo y
+                Ex: loadSprite('./assets/sprite/bird', 'frame', 8, (1, 1))
+        '''
+            
+        sprites = []
+
+        # carrega as sprites para o buffer
+        for n_sprite in range(0, numSprite):
+            tempImageName = prefixImageName + '_' + str(n_sprite) + '.png'
+            folderImage = os.path.join(imagePath, tempImageName)
+            print(f'Loading Imagem: [{folderImage}]')
+            tempImageSurface = pygame.image.load(folderImage).convert()
+            sprites.append(pygame.transform.scale(tempImageSurface, (int(tempImageSurface.get_width() * scaleSprite[0]), int(tempImageSurface.get_height() * scaleSprite[1]))))
+        
+        return sprites
+
     def initGame(self):
         '''
             Função responsável por inicializar e configurar a tela do jogo,
@@ -83,12 +116,15 @@ class Game():
         '''
             Função responsável por atualizar a lógica do jogo
         '''
+        self.groupBird.update(self.deltaTime)
 
     # função de renderização
     def gameRender(self):
         '''
             Função responsável por desenhar na tela do jogo
         '''
+
+        self.groupBird.draw(self.screen)
 
 game = Game((800, 600), title='Game - Sprite')
 game.gameMain()

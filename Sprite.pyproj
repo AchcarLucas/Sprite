@@ -25,9 +25,6 @@
     <Compile Include="Sprite.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="SpriteSheet.py">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\" />
