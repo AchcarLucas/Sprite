@@ -52,12 +52,12 @@ class Game():
 
     def loadImagePacket(self, imagePath, prefixImageName, numSprite, scaleSprite = (1, 1)):
         '''
-            Função loadImagePack, cria uma lista de sprites com imagens com nomes prefix
+            Função loadImagePacket, cria uma lista de sprites com imagens com nomes prefix
                 imagePath       ->  local onde deve ser lido as imagens
                 prefixImageName ->  prefixo da imagem
                 numSprite       ->  número de sprites
                 scaleSprite     ->  escala da imagem no eixo x e no eixo y
-                Ex: loadSprite('./assets/sprite/bird', 'frame', 8, (1, 1))
+                Ex: loadImagePacket('./assets/sprite/bird', 'frame', 8, (1, 1))
         '''
             
         sprites = []
