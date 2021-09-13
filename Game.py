@@ -127,7 +127,7 @@ class Game():
         while self.gameRunning:
             self.deltaTime = self.gameClock.tick(self.fps)
 
-            self.screen.fill((0, 0 ,0))
+            self.screen.fill((127, 127, 127))
 
             for event in pygame.event.get():
                 self.gameEvent(event)
