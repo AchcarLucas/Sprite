@@ -2,6 +2,7 @@ import pygame
 import os
 
 import Sprite
+import Goblin
 
 # Código desenvolvido por Lucas Campos Achcar para a aula de monitoria em Computação Cientifica em Python
 
@@ -60,6 +61,10 @@ class Game():
 
         self.genericGroupSprite.add(Sprite.GSprite(self.campFire, (1 / self.fps) * 0.5, (600, 500)))
 
+        self.playerGoblin = Goblin.Goblin(self.goblin, Goblin.ActionGoblin.IDLE_DOWN, (1 / self.fps) * 0.5, (600, 500))
+
+        self.genericGroupSprite.add(self.playerGoblin)
+
     def loadSpriteSheetPacket(self, imagePath, spriteSheetName, dimensionSheet:(int, int), scaleSprite = (1.0, 1.0)):
         '''
             Função loadSpriteSheetPacket, cria uma lista de sprites a partir de uma spritesheet
@@ -72,8 +77,9 @@ class Game():
 
         tempSpriteSheet = pygame.image.load(os.path.join(imagePath, spriteSheetName)).convert_alpha()
 
-        for x in range(0, int((tempSpriteSheet.get_width() / dimensionSheet[0]))):
-            for y in range(0, int((tempSpriteSheet.get_height() / dimensionSheet[1]))):
+        
+        for y in range(0, int((tempSpriteSheet.get_height() / dimensionSheet[1]))):
+            for x in range(0, int((tempSpriteSheet.get_width() / dimensionSheet[0]))):
                 tempImage = pygame.Surface(dimensionSheet)
                 tempImage = tempSpriteSheet.subsurface((x * dimensionSheet[0], y * dimensionSheet[1], dimensionSheet[0], dimensionSheet[1]))
                 
