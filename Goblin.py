@@ -1,4 +1,5 @@
 import pygame
+import math
 from enum import Enum
 
 class ActionGoblin(Enum):
@@ -84,6 +85,7 @@ class Goblin(pygame.sprite.Sprite):
         self.lastAction = self.currentAction
         self.currentAction = actionGoblin
 
+        # IDLE
         if(actionGoblin == ActionGoblin.IDLE_DOWN):
             self.currentSequenceImage = self.IDLE_DOWN
         elif(actionGoblin == ActionGoblin.IDLE_LEFT):
@@ -95,18 +97,17 @@ class Goblin(pygame.sprite.Sprite):
 
         # inicializa a imagem atual com a primeira imagem da ação selecionada
         self.image = self.sprites[self.currentSequenceImage[0]]
-        self.imageIndex = self.currentSequenceImage[0]
+        self.indexImage = self.currentSequenceImage[0]
 
 
     def update(self, deltaTime):
-        self.rect.x = self.spritePosition[0]
-        self.rect.y = self.spritePosition[1]
+        # verifica se a imagem chegou ao fim e se é uma repetição
+        if(self.indexImage == self.currentSequenceImage[1] and self.currentSequenceImage[2]):
+            # adiciona a velocidade ao sprite
+            self.indexImage += deltaTime * self.spriteVelocity
 
-        # adiciona um tempo a indexImage com relação a velocidade e a váriavel de control de tempo (deltaTime)
-        self.indexImage += deltaTime * self.spriteVelocity
-
-        # verifica se a imagem chegou ao fim
-        self.indexImage = self.indexImage % self.numSprite
+            # verifica se a imagem chegou ao fim e reinicia
+            self.indexImage = (self.indexImage % self.currentSequenceImage[1]) + self.currentSequenceImage[0]
 
         # coloca no currentImage a imagem atual a ser desenhada
-        self.image = self.sprites[int(self.indexImage)]
+        self.image = self.sprites[math.floor(self.indexImage)]
