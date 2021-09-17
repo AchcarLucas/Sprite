@@ -8,11 +8,14 @@ import Ninja
 # Código desenvolvido por Lucas Campos Achcar para a aula de monitoria em Computação Cientifica em Python
 
 '''
-    Free Sprite and SpriteSheet     ->  https://opengameart.org/content/lots-of-free-2d-tiles-and-sprites-by-hyptosis
-    Camp Fire						->	https://opengameart.org/content/camp-fire-animation-for-rpgs-finished
-    Bird (Sprite)                   ->  https://opengameart.org/content/fat-bird-sprite-sheets-for-gamedev
-    Bat (SpriteSheet)               ->  https://opengameart.org/content/bat-sprite
-    Goblin (SpriteeSheet)           ->  https://opengameart.org/content/lpc-goblin
+    Free Sprite and SpriteSheet     	->	https://opengameart.org/content/lots-of-free-2d-tiles-and-sprites-by-hyptosis
+    Camp Fire				            ->	https://opengameart.org/content/camp-fire-animation-for-rpgs-finished
+    Bird (Sprite)                   	->	https://opengameart.org/content/fat-bird-sprite-sheets-for-gamedev
+    Bat (SpriteSheet)               	->	https://opengameart.org/content/bat-sprite
+    Goblin (SpriteeSheet)           	->	https://opengameart.org/content/lpc-goblin
+    Pixel Art Character Sprite Sheet	->	https://www.vhv.rs/download/wmmxbb_preview-pixel-art-character-sprite-sheet-hd-png/
+    Hero Sheet				            ->	https://opengameart.org/content/2d-hero
+    Ninja Sheet				            ->	https://opengameart.org/content/ninja
 '''
 
 class Game():
