@@ -62,7 +62,7 @@ class Game():
 
         self.genericGroupSprite.add(Sprite.GSprite(self.campFire, (1 / self.fps) * 0.5, (600, 500)))
 
-        self.playerNinja = Ninja.Ninja(self.ninjaSheet, Ninja.ActionNinja.JUMP_RIGHT, (1 / self.fps) * 0.8, (700, 500))
+        self.playerNinja = Ninja.Ninja(self.ninjaSheet, Ninja.ActionNinja.DANCE, (1 / self.fps) * 0.8, (700, 500))
 
         self.genericGroupSprite.add(self.playerNinja)
 
