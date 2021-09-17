@@ -28,6 +28,10 @@ class Game():
                 title       ->  contendo o titulo do jogo
                 icon        ->  contendo uma surface (imagem) com o icone a ser exibido na tela
         '''
+        # cria a classe superior (construtor superior)
+        super().__init__()
+
+
         # inicializa as variáveis da classe
         self.gameRunning = True
         self.screenSize = screenSize
@@ -53,6 +57,7 @@ class Game():
         self.groupBird.add(Sprite.GSprite(self.packetImageBird, (1 / self.fps) * 3, (200, 200)))
 
         self.pacMan = Sprite.GSprite(self.packetImagePacMan, (1 / self.fps) * 3, (500, 500))
+        self.pacMan.setPosition((0, 0))
 
         self.groupPacMan.add(self.pacMan)
 
@@ -62,7 +67,7 @@ class Game():
 
         self.genericGroupSprite.add(Sprite.GSprite(self.campFire, (1 / self.fps) * 0.5, (600, 500)))
 
-        self.playerNinja = Ninja.Ninja(self.ninjaSheet, Ninja.ActionNinja.DANCE, (1 / self.fps) * 0.8, (700, 500))
+        self.playerNinja = Ninja.Ninja(self.ninjaSheet, Ninja.ActionNinja.IDLE_FRONT, (1 / self.fps) * 0.8, (700, 500))
 
         self.genericGroupSprite.add(self.playerNinja)
 
@@ -163,6 +168,35 @@ class Game():
         '''
             Função responsável por atualizar a lógica do jogo
         '''
+
+        keys = pygame.key.get_pressed()
+
+        # press M para fazer o personagem dançar
+        if(keys[pygame.K_m] and not(self.playerNinja.getHasAnimation())):
+            self.playerNinja.setAction(Ninja.ActionNinja.DANCE)
+
+        # JUMP
+        if(keys[pygame.K_SPACE]):
+            if(self.playerNinja.getLastAction() == Ninja.ActionNinja.WALK_RIGHT or self.playerNinja.getLastAction() == Ninja.ActionNinja.JUMP_RIGHT):
+                self.playerNinja.setAction(Ninja.ActionNinja.JUMP_RIGHT)
+            elif(self.playerNinja.getLastAction() == Ninja.ActionNinja.WALK_LEFT or self.playerNinja.getLastAction() == Ninja.ActionNinja.JUMP_LEFT):
+                self.playerNinja.setAction(Ninja.ActionNinja.JUMP_LEFT)
+
+        # WALK
+        if(keys[pygame.K_d]):
+            if(self.playerNinja.getCurrentAction() != Ninja.ActionNinja.WALK_RIGHT):
+                self.playerNinja.setAction(Ninja.ActionNinja.WALK_RIGHT)
+        elif(keys[pygame.K_a]):
+            if(self.playerNinja.getCurrentAction() != Ninja.ActionNinja.WALK_LEFT):
+                self.playerNinja.setAction(Ninja.ActionNinja.WALK_LEFT)
+        # se a tecla não for mais pressionada, para de caminhar
+        elif(self.playerNinja.getHasAnimation() and (self.playerNinja.getCurrentAction() == Ninja.ActionNinja.WALK_RIGHT or self.playerNinja.getCurrentAction() == Ninja.ActionNinja.WALK_LEFT)):
+            self.playerNinja.setAction(Ninja.ActionNinja.IDLE_FRONT)
+
+        # se não existe nenhuma ação e nenhuma animação, se a ação é diferente do IDLE_FRONT, volta para IDLE_FRONT
+        if(not(self.playerNinja.getHasAnimation()) and self.playerNinja.getCurrentAction() != Ninja.ActionNinja.IDLE_FRONT):
+            self.playerNinja.setAction(Ninja.ActionNinja.IDLE_FRONT)
+
 
         self.groupBird.update(self.deltaTime)
         self.groupPacMan.update(self.deltaTime)
