@@ -1,4 +1,5 @@
 import pygame
+import math
 
 class GSprite(pygame.sprite.Sprite):
     '''
@@ -50,7 +51,7 @@ class GSprite(pygame.sprite.Sprite):
         self.indexImage = self.indexImage % self.numSprite
 
         # coloca no currentImage a imagem atual a ser desenhada
-        self.image = self.sprites[int(self.indexImage)]
+        self.image = self.sprites[math.floor(self.indexImage)]
 
     def getPosition(self):
         return self.spritePosition

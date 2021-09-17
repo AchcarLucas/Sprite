@@ -1,8 +1,9 @@
 import pygame
+import math
 import os
 
 import Sprite
-import Goblin
+import Ninja
 
 # Código desenvolvido por Lucas Campos Achcar para a aula de monitoria em Computação Cientifica em Python
 
@@ -57,15 +58,15 @@ class Game():
 
         # carrega nossas spritesheets
         self.campFire = self.loadSpriteSheetPacket('./assets/spritesheet', 'CampFire.png', (64, 64))
-        self.goblin = self.loadSpriteSheetPacket('./assets/spritesheet', 'goblinsword.png', (64, 64))
+        self.ninjaSheet = self.loadSpriteSheetPacket('./assets/spritesheet', 'ninja.png', (50, 77),  (1, 1))
 
         self.genericGroupSprite.add(Sprite.GSprite(self.campFire, (1 / self.fps) * 0.5, (600, 500)))
 
-        self.playerGoblin = Goblin.Goblin(self.goblin, Goblin.ActionGoblin.IDLE_DOWN, (1 / self.fps) * 0.5, (600, 500))
+        self.playerNinja = Ninja.Ninja(self.ninjaSheet, Goblin.ActionNinja.JUMP_RIGHT, (1 / self.fps) * 0.8, (700, 500))
 
-        self.genericGroupSprite.add(self.playerGoblin)
+        self.genericGroupSprite.add(self.playerNinja)
 
-    def loadSpriteSheetPacket(self, imagePath, spriteSheetName, dimensionSheet:(int, int), scaleSprite = (1.0, 1.0)):
+    def loadSpriteSheetPacket(self, imagePath, spriteSheetName, dimensionSheet:(int, int), scaleSprite = (1, 1)):
         '''
             Função loadSpriteSheetPacket, cria uma lista de sprites a partir de uma spritesheet
                 imagePath       ->  local onde deve ser lido as imagens
@@ -81,7 +82,7 @@ class Game():
         for y in range(0, int((tempSpriteSheet.get_height() / dimensionSheet[1]))):
             for x in range(0, int((tempSpriteSheet.get_width() / dimensionSheet[0]))):
                 tempImage = pygame.Surface(dimensionSheet)
-                tempImage = tempSpriteSheet.subsurface((x * dimensionSheet[0], y * dimensionSheet[1], dimensionSheet[0], dimensionSheet[1]))
+                tempImage = tempSpriteSheet.subsurface((math.floor(x * dimensionSheet[0]), math.floor(y * dimensionSheet[1]), dimensionSheet[0], dimensionSheet[1]))
                 
                 sprites.append(tempImage)
 
