@@ -16,12 +16,12 @@ class ActionNinja(Enum):
 
 class Ninja(pygame.sprite.Sprite):
     '''
-        Class de Controle do Goblin
+        Class de Controle do Ninja
     '''
-    def __init__(self, spriteList, actionGoblin : ActionNinja, spriteVelocity, spritePosition = (0, 0)):
+    def __init__(self, spriteList, actionNinja : ActionNinja, spriteVelocity, spritePosition = (0, 0)):
         '''
             Construtor da Classe GSprite, possui como parâmetro
-                ActionGoblin    -> define a ação do Goblin definida com o Enum ActionGoblin
+                actionNinja     -> define a ação do Ninja definida com o Enum ActionNinja
                 spriteList      ->  lista contendo todas as surfaces (imagens) da sua sprite
                                 que corresponde a largura e altura, ex (800, 600)
                 spriteVelocity  ->  velocidade em que a sprite irá ser executada
@@ -32,7 +32,7 @@ class Ninja(pygame.sprite.Sprite):
 
         # initializa as váriaveis posição e action da sprite
         self.spritePosition = spritePosition
-        self.actionGoblin = actionGoblin
+        self.actionNinja = actionNinja
 
         # range das animações na lista de sprite [inicio da animação, fim da animação, repeat]
 
@@ -51,7 +51,7 @@ class Ninja(pygame.sprite.Sprite):
         # lista de sprites
         self.sprites = spriteList
 
-        self.currentAction = actionGoblin
+        self.currentAction = actionNinja
         self.has_action = False
 
         self.setAction(self.currentAction)
@@ -62,24 +62,24 @@ class Ninja(pygame.sprite.Sprite):
         # velocidade da imagem
         self.spriteVelocity = spriteVelocity
 
-    def setAction(self, actionGoblin):
+    def setAction(self, actionNinja):
         self.lastAction = self.currentAction
-        self.currentAction = actionGoblin
+        self.currentAction = actionNinja
 
         print(f'lastAction [{self.lastAction}] - currentAction [{self.currentAction}]')
 
         # IDLE
-        if(actionGoblin == ActionNinja.IDLE_FRONT):
+        if(actionNinja == ActionNinja.IDLE_FRONT):
             self.currentSequenceImage = self.IDLE_FRONT
-        elif(actionGoblin == ActionNinja.IDLE_RIGHT):
+        elif(actionNinja == ActionNinja.IDLE_RIGHT):
             self.currentSequenceImage = self.IDLE_RIGHT
-        elif(actionGoblin == ActionNinja.IDLE_LEFT):
+        elif(actionNinja == ActionNinja.IDLE_LEFT):
             self.currentSequenceImage = self.IDLE_LEFT
            
         # JUMP
-        if(actionGoblin == ActionNinja.JUMP_RIGHT):
+        if(actionNinja == ActionNinja.JUMP_RIGHT):
             self.currentSequenceImage = self.JUMP_RIGHT
-        elif(actionGoblin == ActionNinja.JUMP_LEFT):
+        elif(actionNinja == ActionNinja.JUMP_LEFT):
             self.currentSequenceImage = self.JUMP_LEFT
 
         # inicializa a imagem atual com a primeira imagem da ação selecionada
