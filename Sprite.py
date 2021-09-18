@@ -12,7 +12,6 @@ class GSprite(pygame.sprite.Sprite):
         '''
             Construtor da Classe GSprite, possui como parâmetro
                 spriteList      ->  lista contendo todas as surfaces (imagens) da sua sprite
-                                que corresponde a largura e altura, ex (800, 600)
                 spriteVelocity  ->  velocidade em que a sprite irá ser executada
                 spritePosition  ->  posição em que a sprite irá ser desenhada, por padrão é (0, 0)
         '''
