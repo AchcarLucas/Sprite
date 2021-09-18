@@ -6,7 +6,7 @@ class GSprite(pygame.sprite.Sprite):
         Classe GSprite Genérica para criar sprites
         Use essa GSprite para sprites que não vão se movimentar (não tenha ação)
         Para usar sprites que contenha ação, crie uma particular para o que deseja
-        OBS: Veja a classe GSpriteBat
+        OBS: Veja a classe Ninja
     '''
     def __init__(self, spriteList, spriteVelocity, spritePosition = (0, 0)):
         '''
