@@ -31,10 +31,6 @@ class Game():
                 title       ->  contendo o titulo do jogo
                 icon        ->  contendo uma surface (imagem) com o icone a ser exibido na tela
         '''
-        # cria a classe superior (construtor superior)
-        super().__init__()
-
-
         # inicializa as variáveis da classe
         self.gameRunning = True
         self.screenSize = screenSize
