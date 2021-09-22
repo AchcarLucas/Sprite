@@ -74,9 +74,10 @@ class Game():
         '''
             Função loadSpriteSheetPacket, cria uma lista de sprites a partir de uma spritesheet
                 imagePath       ->  local onde deve ser lido as imagens
-                dimensionSprite ->  dimensão da sprite (largura e altura)
+                spriteSheetName ->  nome do arquivo a ser carregado
+                dimensionSheet  ->  dimensão da sprite (largura e altura)
                 scaleSprite     ->  escala das imagens no eixo x e no eixo y
-                Ex: loadSpriteSheetPacket('./assets/spritesheet/CampFire.png', (64, 64), (1, 1))
+                Ex: loadSpriteSheetPacket('./assets', 'sheet.png', (64, 64), (1, 1))
         '''
         sprites = []
 
