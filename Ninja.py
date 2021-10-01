@@ -26,13 +26,13 @@ class Ninja(pygame.sprite.Sprite):
     '''
         Class de Controle do Ninja
     '''
-    def __init__(self, spriteList, actionNinja : ActionNinja, spriteVelocity, spritePosition = (0, 0)):
+    def __init__(self, imageList, currentAction : ActionNinja, frameRate, spritePosition = (0, 0)):
         '''
             Construtor da Classe GSprite, possui como parâmetro
                 actionNinja     -> define a ação do Ninja definida com o Enum ActionNinja
-                spriteList      ->  lista contendo todas as surfaces (imagens) da sua sprite
+                imageList       ->  lista contendo todas as surfaces (imagens) da sua sprite
                                 que corresponde a largura e altura, ex (800, 600)
-                spriteVelocity  ->  velocidade em que a sprite irá ser executada
+                frameRate       ->  velocidade em que a sprite irá ser executada
                 spritePosition  ->  posição em que a sprite irá ser desenhada, por padrão é (0, 0)
         '''
          # Chama o construtor __init__ da classe superior
@@ -40,10 +40,10 @@ class Ninja(pygame.sprite.Sprite):
 
         # initializa as váriaveis posição e action da sprite
         self.spritePosition = spritePosition
-        self.actionNinja = actionNinja
+        self.currentAction = currentAction
 
         # velocidade da imagem
-        self.spriteVelocity = spriteVelocity
+        self.frameRate = frameRate
 
         # range das animações na lista de sprite [inicio da animação, fim da animação, repeat, velocity]
 
@@ -54,30 +54,30 @@ class Ninja(pygame.sprite.Sprite):
         self.IDLE_CLIMB     = (7, 7, False, 0)
 
         # JUMP
-        self.JUMP_LEFT = ((8 * 4), (8 * 4) + 3, False, self.spriteVelocity * 0.8)
-        self.JUMP_RIGHT = ((8 * 4) + 4, (8 * 4) + 7, False, self.spriteVelocity * 0.8)
+        self.JUMP_LEFT = ((8 * 4), (8 * 4) + 3, False, self.frameRate * 0.8)
+        self.JUMP_RIGHT = ((8 * 4) + 4, (8 * 4) + 7, False, self.frameRate * 0.8)
 
         # ATTACK
-        self.ATTACK_RIGHT = ((8 * 3), (8 * 3) + 3, False, self.spriteVelocity * 1.0)
-        self.ATTACK_LEFT = ((8 * 3) + 4, (8 * 3) + 7, False, self.spriteVelocity * 1.0)
+        self.ATTACK_RIGHT = ((8 * 3), (8 * 3) + 3, False, self.frameRate * 1.0)
+        self.ATTACK_LEFT = ((8 * 3) + 4, (8 * 3) + 7, False, self.frameRate * 1.0)
 
         # CLIMB
-        self.CLIMB = (4, 7, False, self.spriteVelocity * 0.5)
+        self.CLIMB = (4, 7, False, self.frameRate * 0.5)
 
         # DANCE
-        self.DANCE = ((8 * 3), (8 * 3) + 7, False, self.spriteVelocity * 0.5)
+        self.DANCE = ((8 * 3), (8 * 3) + 7, False, self.frameRate * 0.5)
 
         # WALK
-        self.WALK_RIGHT = ((8 * 2), (8 * 2) + 7, True, self.spriteVelocity * 0.6)
-        self.WALK_LEFT = ((8 * 1), (8 * 1) + 7, True, self.spriteVelocity * 0.6)
+        self.WALK_RIGHT = ((8 * 2), (8 * 2) + 7, True, self.frameRate * 0.6)
+        self.WALK_LEFT = ((8 * 1), (8 * 1) + 7, True, self.frameRate * 0.6)
 
         # quantidade de imagens (sprites)
-        self.numSprite = len(spriteList)
+        self.numSprite = len(imageList)
 
         # lista de sprites
-        self.sprites = spriteList
+        self.imageList = imageList
 
-        self.currentAction = actionNinja
+        self.currentAction = currentAction
         self.setAction(self.currentAction)
 
         self.rect = self.image.get_rect()
@@ -126,9 +126,9 @@ class Ninja(pygame.sprite.Sprite):
             self.currentSequenceImage = self.WALK_LEFT
 
         # inicializa a imagem atual com a primeira imagem da ação selecionada
-        self.image = self.sprites[self.currentSequenceImage[0]]
+        self.image = self.imageList[self.currentSequenceImage[0]]
         self.indexImage = self.currentSequenceImage[0]
-        self.spriteVelocity = self.currentSequenceImage[3]
+        self.frameRate = self.currentSequenceImage[3]
 
         self.hasAnimation = False
 
@@ -140,7 +140,7 @@ class Ninja(pygame.sprite.Sprite):
         # verifica se a imagem chegou ao fim e se é uma repetição
         if(self.indexImage >= self.currentSequenceImage[0] and self.indexImage <= self.currentSequenceImage[1] and self.hasAnimation):
             # adiciona ao index uma velocidade (troca de sprite)
-            self.indexImage += deltaTime * self.spriteVelocity
+            self.indexImage += deltaTime * self.frameRate
         # verifica se é uma repetição, se for, reinicia o indexImage e começa tudo novamente
         elif(self.currentSequenceImage[2] and self.hasAnimation):
             # verifica se a imagem chegou ao fim e reinicia (se for repeat)
@@ -151,7 +151,7 @@ class Ninja(pygame.sprite.Sprite):
             self.hasAnimation = False
             
         # coloca no currentImage a imagem atual a ser desenhada
-        self.image = self.sprites[math.floor(self.indexImage)]
+        self.image = self.imageList[math.floor(self.indexImage)]
 
     def getHasAnimation(self):
         return self.hasAnimation
